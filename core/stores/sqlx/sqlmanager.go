@@ -2,6 +2,7 @@ package sqlx
 
 import (
 	"database/sql"
+	"github.com/tal-tech/go-zero/core/logx"
 	"io"
 	"sync"
 	"time"
@@ -11,7 +12,7 @@ import (
 
 const (
 	maxIdleConns = 64
-	maxOpenConns = 50
+	maxOpenConns = 64
 	maxLifetime  = time.Minute * 120
 	maxIdleTime  = time.Minute * 60
 )
@@ -71,6 +72,7 @@ func newDBConnection(driverName, datasource string) (*sql.DB, error) {
 	conn.SetMaxOpenConns(maxOpenConns)
 	conn.SetConnMaxLifetime(maxLifetime)
 	conn.SetConnMaxIdleTime(maxIdleTime)
+	logx.Error("已修改", maxIdleConns, maxIdleConns, maxLifetime, maxIdleTime)
 
 	return conn, nil
 }
