@@ -12,7 +12,8 @@ import (
 const (
 	maxIdleConns = 64
 	maxOpenConns = 64
-	maxLifetime  = time.Minute
+	maxLifetime  = time.Minute * 120
+	maxIdleTime  = time.Minute * 60
 )
 
 var connManager = syncx.NewResourceManager()
@@ -69,6 +70,7 @@ func newDBConnection(driverName, datasource string) (*sql.DB, error) {
 	conn.SetMaxIdleConns(maxIdleConns)
 	conn.SetMaxOpenConns(maxOpenConns)
 	conn.SetConnMaxLifetime(maxLifetime)
+	conn.SetConnMaxIdleTime(maxIdleTime)
 
 	return conn, nil
 }
