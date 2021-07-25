@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	maxIdleConns = 64
-	maxOpenConns = 64
+	maxIdleConns = 100
+	maxOpenConns = 200
 	maxLifetime  = time.Minute * 120
 	maxIdleTime  = time.Minute * 60
 )
